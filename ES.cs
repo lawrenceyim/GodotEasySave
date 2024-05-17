@@ -19,11 +19,29 @@ public class ES {
 
     // This function requires explicit type-casting
     // Example usage
-    // Vector2 position = (Vector2) ES.Load("SaveFiles/Save1.json", "position", new Vector2(0, 0))
+    // int age = (int) ES.Load("SaveFiles/Save1.json", "age", 18);
     public static Variant Load(string filePath, string propertyName, Variant defaultValue) {
         Dictionary dict = GetDictionary(filePath);
         if (dict.ContainsKey(propertyName)) {
             return dict[propertyName];
+        }
+        return defaultValue;
+    }
+
+    // Overloaded method for Load that returns a Vector2
+    public static Vector2 Load(string filePath, string propertyName, Vector2 defaultValue) {
+        Dictionary dict = GetDictionary(filePath);
+        if (dict.ContainsKey(propertyName)) {
+            return StringToVector2((string)dict[propertyName]);
+        }
+        return defaultValue;
+    }
+
+    // Overloaded method for Load that returns a Vector3
+    public static Vector3 Load(string filePath, string propertyName, Vector3 defaultValue) {
+        Dictionary dict = GetDictionary(filePath);
+        if (dict.ContainsKey(propertyName)) {
+            return StringToVector3((string)dict[propertyName]);
         }
         return defaultValue;
     }
@@ -46,5 +64,26 @@ public class ES {
         }
         return dicts[filePath];
     }
-}
 
+    //  Parse the string representation of a Vector2 and returns a Vector2
+    private static Vector2 StringToVector2(string vector2String) {
+        try {
+            vector2String = vector2String.Trim('(', ')');
+            string[] parts = vector2String.Split(',');
+            return new Vector2(float.Parse(parts[0]), float.Parse(parts[1]));
+        } catch {
+            throw new System.Exception("Invalid string representation of Vector2");
+        }
+    }
+
+    //  Parse the string representation of a Vector3 and returns a Vector3
+    private static Vector3 StringToVector3(string vector3String) {
+        try {
+            vector3String = vector3String.Trim('(', ')');
+            string[] parts = vector3String.Split(',');
+            return new Vector3(float.Parse(parts[0]), float.Parse(parts[1]), float.Parse(parts[2]));
+        } catch {
+            throw new System.Exception("Invalid string representation of Vector3");
+        }
+    }
+}
