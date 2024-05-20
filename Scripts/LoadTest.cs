@@ -3,7 +3,7 @@ using Godot;
 // Run this test after the SaveAndLoadTest
 public partial class LoadTest : Node
 {
-	private string filePath = "Save Test/SaveFiles/SaveTest1.json";
+	private string filePath = "SaveTest/SaveFiles/SaveTest1.json";
 
 	public override void _Ready()
 	{
@@ -27,5 +27,11 @@ public partial class LoadTest : Node
 
 		Vector3 vector3Load = ES.Load(filePath, "vector3", new Vector3(0, 0, 0));	
 		GD.Print(vector3Load.Equals(new Vector3(1, 1, 1)));
+	
+		int[] intArrayLoad = (int[]) ES.Load(filePath, "intArray", new int[] {1});
+		Utils.PrintArray(intArrayLoad);
+		
+		double[] doubleArrayLoad = (double[]) ES.Load(filePath, "doubleArray", new int[] {1});
+		Utils.PrintArray(doubleArrayLoad);
 	}
 }

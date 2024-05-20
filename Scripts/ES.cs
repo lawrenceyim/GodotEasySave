@@ -13,7 +13,14 @@ using Godot.Collections;
 	Vector2
 	Vector3
 
-	Other data types may be used, but the JSON conversion is not guaranteed
+	These data types require explicit typecasting on Load:
+	int[]
+	double[]
+
+	These data types are not supported:
+	bool[]
+
+	Other data types may be used, but the JSON conversion on save or load is not guaranteed
 */
 
 public class ES {
