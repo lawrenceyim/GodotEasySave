@@ -42,6 +42,10 @@ public partial class SaveAndLoadTest : Node
 		ES.Save(filePath, "doubleArray", new double[] { 1, 2, 3 });
 		double[] doubleArrayLoad = (double[])ES.Load(filePath, "doubleArray", new int[] { 1 });
 		Utils.PrintArray(doubleArrayLoad);
+		
+		Weapon weapon = new Weapon("slayer", 10, true);
+		ES.Save(filePath, "Weapon", weapon.ToDictionaryFormat());
+		GD.Print(ES.Load(filePath, "Weapon", new Weapon("null", 0, false).ToDictionaryFormat()));	
 	}
 
 }

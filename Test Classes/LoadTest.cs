@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 // Run this test after the SaveAndLoadTest
 public partial class LoadTest : Node
@@ -33,5 +34,8 @@ public partial class LoadTest : Node
 		
 		double[] doubleArrayLoad = (double[]) ES.Load(filePath, "doubleArray", new int[] {1});
 		Utils.PrintArray(doubleArrayLoad);
+		
+		Weapon weaponLoad = Weapon.FromDictionaryFormat((Dictionary) ES.Load(filePath, "Weapon", new Weapon("null", 0, false).ToDictionaryFormat()));
+		GD.Print(weaponLoad.ToDictionaryFormat());	
 	}
 }
